@@ -1,18 +1,35 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\UrlController;
+
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Authentication routes
+Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
+Route::get('registration', [AuthController::class, 'registration'])->name('register');
+Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard'); 
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+// Url routes
+Route::get('list', [UrlController::class, 'index'])->name('list');
+Route::post('create_url', [UrlController::class, 'store'])->name('create_url');
+
+Route::get('{short_url}', [UrlController::class, 'deleteShortenLink'])->name('shorten.link.delete');
+Route::get('edit_url/{url_id}', [UrlController::class, 'editShortenLink'])->name('shorten.link.edit');
+Route::get('disable/{url_id}', [UrlController::class, 'disableShortenLink'])->name('shorten.link.disable');
+
+Route::post('edit_url/{url_id}', [UrlController::class, 'editLink'])->name('link.edit');
+
+
+
