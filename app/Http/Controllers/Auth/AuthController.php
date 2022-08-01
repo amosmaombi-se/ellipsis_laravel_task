@@ -130,7 +130,7 @@ class AuthController extends Controller
         ]);
         $update = User::where('id',$id)->update(['name' => $request['name'], 'email'=> $request['email']]);
         if($update){
-          return redirect("dashboard")->withSuccess('Great! Updated successfully!');
+          return redirect()->back()->with('success', 'Great! Updated successfully!');
         }
     }
 

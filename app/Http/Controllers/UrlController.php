@@ -53,7 +53,8 @@ class UrlController extends Controller
         $short_url = Str::random(10);
         Url::where('id',$url_id)->update(['full_url' => $full_url, 'short_url' => $short_url]);
         $urlLinks = Url::latest()->get();
-        return view('url.index', compact('urlLinks'));
+        
+         return view('url.index', compact('urlLinks'))->with('success', 'Shorten Link Generated Successfully!');
     }
 
     public function disableShortenLink()
