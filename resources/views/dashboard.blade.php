@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card"> 
               <div class="card-header">{{ __('Shorten Url') }}</div>
-  
                 
                  <form method="POST" action="{{ route('create_url') }}">
                     @csrf

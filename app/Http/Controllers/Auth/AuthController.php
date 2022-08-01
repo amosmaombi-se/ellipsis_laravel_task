@@ -107,7 +107,49 @@ class AuthController extends Controller
     public function logout() {
         Session::flush();
         Auth::logout();
-  
         return Redirect('/');
+    }
+
+
+    public function userProfile()
+    {
+        if(Auth::check()){
+            $user = \Auth::user();
+            return view('auth.user_profile',compact('user'));
+        }
+    }
+
+
+    // update user model
+    public function updateUserProfile(Request $request)
+    {
+        $id = \Auth::id();
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+        $update = User::where('id',$id)->update(['name' => $request['name'], 'email'=> $request['email']]);
+        if($update){
+          return redirect("dashboard")->withSuccess('Great! Updated successfully!');
+        }
+    }
+
+
+    public function resetPassword()
+    {
+        $user = \App\Models\User::find(\Auth::user()->id);
+        if (\Auth::attempt(['email' => $user->email, 'password' => request('password')])) {
+            $new_password = request('new_password');
+            $confirm_password = request('confirm_password');
+            if ($new_password != $confirm_password) {
+                return redirect()->back()->with('error', 'New password and confirmed one  do not match');
+            }
+            $user->update(['password' => bcrypt($new_password)]);
+            return redirect()->back()->with('success', 'Password changed successfully');
+        } else {
+            return redirect()->back()->with('error', 'Current Password is not valid');
+        }
+        return redirect()->back()->with('success', 'Password Updated successfully');
+
     }
 }

@@ -7,7 +7,6 @@
             <div class="card">
                 <div class="card-header">{{ __('Edit Url') }}</div>
   
-                
                 <form method="POST" action="{{ route('link.edit', $urlLink->id) }}">
                     @csrf
                     <div class="input-group mb-3">

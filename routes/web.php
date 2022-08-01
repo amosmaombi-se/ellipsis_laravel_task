@@ -21,6 +21,12 @@ Route::post('post-registration', [AuthController::class, 'postRegistration'])->n
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard'); 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('profile', [AuthController::class, 'userProfile'])->name('profile');
+Route::post('update', [AuthController::class, 'updateUserProfile'])->name('user.edit');
+Route::post('resetPassword', [AuthController::class, 'resetPassword'])->name('user.resetpassword');
+
+
+
 // Url routes
 Route::get('list', [UrlController::class, 'index'])->name('list');
 Route::post('create_url', [UrlController::class, 'store'])->name('create_url');
@@ -30,6 +36,8 @@ Route::get('edit_url/{url_id}', [UrlController::class, 'editShortenLink'])->name
 Route::get('disable/{url_id}', [UrlController::class, 'disableShortenLink'])->name('shorten.link.disable');
 
 Route::post('edit_url/{url_id}', [UrlController::class, 'editLink'])->name('link.edit');
+
+
 
 
 
