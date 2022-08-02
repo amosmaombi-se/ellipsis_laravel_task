@@ -23,11 +23,8 @@ class UrlController extends Controller
    
         $input['full_url'] = $request->url_link;
         $input['short_url'] = Str::random(10);
-   
         Url::create($input);
-  
-        return redirect('list')
-             ->with('success', 'Shorten Link Generated Successfully!');
+        return redirect('list')->with('success', 'Shorten Link Generated Successfully!');
     }
 
 
@@ -54,13 +51,20 @@ class UrlController extends Controller
         Url::where('id',$url_id)->update(['full_url' => $full_url, 'short_url' => $short_url]);
         $urlLinks = Url::latest()->get();
         
-         return view('url.index', compact('urlLinks'))->with('success', 'Shorten Link Generated Successfully!');
+        return view('url.index', compact('urlLinks'))->with('success', 'Shorten Link Generated Successfully!');
     }
 
     public function disableShortenLink()
     {
         $full_url = request('full_url');
         $short_url = Str::random(10);
+    }
+
+
+    public function shortenUrlLink($short_url_id)
+    {
+        $find_url = Url::where('id', $short_url_id)->first();
+        return redirect($find_url->full_url);
     }
 
 }

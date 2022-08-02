@@ -10,7 +10,7 @@
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Full link</th>
-                    <th scope="col">Shorten link</th>
+                    <th scope="col">Short link</th>
                     <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -20,7 +20,9 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $value->full_url }}</td>
-                            <td>{{ $value->short_url }}</a></td>
+                            <?php  $show_url = "/check/$value->id"; ?>
+
+                            <td><a href="<?= url($show_url) ?>" target="_blank">{{ route('short.url_link', $value->short_url) }}</a></td>
                             <td>
                               <a class="btn btn-danger btn-mini btn-round" href="{{ route('shorten.link.delete', $value->id) }}">delete</a>
                               <a class="btn btn-info btn-mini btn-round" href="{{ route('shorten.link.edit', $value->id) }}">edit</a>

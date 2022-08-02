@@ -37,6 +37,8 @@ Route::get('disable/{url_id}', [UrlController::class, 'disableShortenLink'])->na
 
 Route::post('edit_url/{url_id}', [UrlController::class, 'editLink'])->name('link.edit');
 
+Route::get('/check/{id}', [UrlController::class,'shortenUrlLink'])->name('short.url_link');
+
 
 
 
