@@ -26,7 +26,7 @@
                             <td>
                               <a class="btn btn-danger btn-mini btn-round" href="{{ route('shorten.link.delete', $value->id) }}">delete</a>
                               <a class="btn btn-info btn-mini btn-round" href="{{ route('shorten.link.edit', $value->id) }}">edit</a>
-                              <a class="btn btn-primary btn-mini btn-round" href="{{ route('shorten.link.disable', $value->id) }}">disable</a>
+                              <!-- <a class="btn btn-primary btn-mini btn-round" href="{{ route('shorten.link.disable', $value->id) }}">disable</a> -->
                             </td>
                         </tr>
                     @endforeach

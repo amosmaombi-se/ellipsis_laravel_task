@@ -10,7 +10,7 @@ class Url extends Model
     use HasFactory;
 
     protected $fillable = [
-        'full_url', 'short_url'
+        'full_url', 'short_url','created_at'
     ];
 
 }
